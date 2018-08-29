@@ -1,63 +1,41 @@
 version: "v1.0"
-name: First pipeline example
+name: v2 valid pipeline
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
+promotions:
+- name: stg
+  pipeline_path: p1.yml
+  auto_trigger_on:
+    - result: passed
+      branch:
+        - "v2-valid."
+    - result: failed
+      branch:
+        - "v2-failing."
+- name: prod
+  pipeline_path: p2.yml
+
 blocks:
-  - name: "Build"
-    task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
-      jobs:
-      - name: Docker build
-        commands:
-          - checkout
-          - ls -1
-          - echo $APP_ENV
-          - echo "Docker build..."
-          - echo "done"
-
-  - name: "Smoke tests"
+  - name: block1
     task:
       jobs:
-      - name: Smoke
-        commands:
-          - checkout
-          - echo "make smoke"
-
-  - name: "Unit tests"
+        - name: job1
+          commands:
+            - echo foo
+            - echo bar
+        - name: job2
+          commands:
+            - echo baz
+  - name: block2
     task:
       jobs:
-      - name: RSpec
-        commands:
-          - checkout
-          - echo "make rspec"
-
-      - name: Lint code
-        commands:
-          - checkout
-          - echo "make lint"
-
-      - name: Check security
-        commands:
-          - checkout
-          - echo "make security"
-
-  - name: "Integration tests"
-    task:
-      jobs:
-      - name: Cucumber
-        commands:
-          - checkout
-          - echo "make cucumber"
-
-  - name: "Push Image"
-    task:
-      jobs:
-      - name: Push
-        commands:
-          - checkout
-          - echo "make docker.push"
+        - name: job1
+          commands:
+            - echo foo
+            - echo bar
+        - name: job2
+          commands:
+            - echo baz
