@@ -7,7 +7,7 @@ agent:
 
 switch:
 
-- name: stg
+- name: Master
   pipeline_path: p1.yml
   auto_trigger_on:
     - result: passed
@@ -15,30 +15,29 @@ switch:
         - "master."
     - result: failed
       branch:
-        - "v2-failing."
+        - "v2."
 
 - name: prod
   pipeline_path: p2.yml
 
 blocks:
-  - name: block1
+  - name: Block 1
     task:
       jobs:
-        - name: job1
+        - name: SEMAPHORE_GIT_BRANCH
           commands:
-            - echo foo
-            - echo bar
+            - echo $SEMAPHORE_GIT_BRANCH
         - name: job2
           commands:
             - echo baz
 
-  - name: block2
+  - name: Block 2
     task:
       jobs:
-        - name: job1
+        - name: SEMAPHORE_GIT_BRANCH
           commands:
-            - echo foo
-            - echo bar
+            - echo Block 2
+            - echo $SEMAPHORE_GIT_BRANCH
         - name: job2
           commands:
-            - echo baz
+            - echo Block 2
