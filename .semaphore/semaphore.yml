@@ -12,7 +12,7 @@ switch:
   auto_trigger_on:
     - result: passed
       branch:
-        - "master."
+        - "master"
     - result: failed
       branch:
         - "v2."
