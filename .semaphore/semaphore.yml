@@ -1,41 +1,21 @@
-version: "v1.0"
-name: v2 valid pipeline
+version: v1.0
+name: Using switch
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
-promotions:
-- name: stg
-  pipeline_path: p1.yml
-  auto_trigger_on:
-    - result: passed
-      branch:
-        - "v2-valid."
-    - result: failed
-      branch:
-        - "v2-failing."
-- name: prod
-  pipeline_path: p2.yml
-
 blocks:
-  - name: block1
+  - name: ls
     task:
       jobs:
-        - name: job1
-          commands:
-            - echo foo
-            - echo bar
-        - name: job2
-          commands:
-            - echo baz
-  - name: block2
-    task:
-      jobs:
-        - name: job1
-          commands:
-            - echo foo
-            - echo bar
-        - name: job2
-          commands:
-            - echo baz
+      - name: List contents
+        commands:
+          - ls -al
+          - echo $SEMAPHORE_PIPELINE_ID
+
+switch:
+  - name: Pipeline 1
+    pipeline_path: p1.yml
+  - name: Pipeline 2
+    pipeline_path: p2.yml
