@@ -9,13 +9,13 @@ switch:
 
 - name: stg
   pipeline_path: p1.yml
-#  auto_trigger_on:
-#    - result: passed
-#      branch:
-#        - "v2-valid."
-#    - result: failed
-#      branch:
-#        - "v2-failing."
+  auto_trigger_on:
+    - result: passed
+      branch:
+        - "v2-valid."
+    - result: failed
+      branch:
+        - "v2-failing."
 
 - name: prod
   pipeline_path: p2.yml
