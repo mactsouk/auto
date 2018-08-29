@@ -1,21 +1,42 @@
 version: v1.0
-name: Using switch
+name: Testing Auto Promoting
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 
+promotions:
+- name: stg
+  pipeline_path: p1.yml
+  auto_trigger_on:
+    - result: passed
+      branch:
+        - "v2-valid."
+    - result: failed
+      branch:
+        - "v2-failing."
+- name: prod
+  pipeline_path: p2.yml
+
 blocks:
-  - name: ls
+  - name: block1
     task:
       jobs:
-      - name: List contents
-        commands:
-          - ls -al
-          - echo $SEMAPHORE_PIPELINE_ID
+        - name: job1
+          commands:
+            - echo foo
+            - echo bar
+        - name: job2
+          commands:
+            - echo baz
 
-switch:
-  - name: Pipeline 1
-    pipeline_path: p1.yml
-  - name: Pipeline 2
-    pipeline_path: p2.yml
+  - name: block2
+    task:
+      jobs:
+        - name: job1
+          commands:
+            - echo foo
+            - echo bar
+        - name: job2
+          commands:
+            - echo baz
