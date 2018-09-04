@@ -15,8 +15,7 @@ promotions:
     - result: failed
       branch:
         - "v2."
-      result_reason:
-        - deleted
+      result_reason: malformed
 
 - name: prod
   pipeline_file: p2.yml
