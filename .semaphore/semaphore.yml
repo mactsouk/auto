@@ -38,6 +38,6 @@ blocks:
           commands:
             - echo Job 1 - Block 2
             - echo $SEMAPHORE_GIT_BRANCH
-        - name: job2
+        - name: Job 2 - Block 2
           commands:
             - echo Job 2 - Block 2
