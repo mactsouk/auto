@@ -34,7 +34,7 @@ blocks:
   - name: Block 2
     task:
       jobs:
-        - name: SEMAPHORE_GIT_BRANCH
+        - name: Job 1 - Block 2
           commands:
             - echo Job 1 - Block 2
             - echo $SEMAPHORE_GIT_BRANCH
