@@ -23,20 +23,20 @@ blocks:
   - name: Block 1
     task:
       jobs:
-        - name: SEMAPHORE_GIT_BRANCH
+        - name: Job 1 - Block 1
           commands:
             - echo $SEMAPHORE_GIT_BRANCH
-        - name: job2
+        - name: Job 2 - Block 1
           commands:
-            - echo baz
+            - echo Job 2 - Block 1
 
   - name: Block 2
     task:
       jobs:
         - name: SEMAPHORE_GIT_BRANCH
           commands:
-            - echo Block 2
+            - echo Job 1 - Block 2
             - echo $SEMAPHORE_GIT_BRANCH
         - name: job2
           commands:
-            - echo Block 2
+            - echo Job 2 - Block 2
