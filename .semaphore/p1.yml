@@ -1,5 +1,5 @@
 version: v1.0
-name: Pipeline 1
+name: Pipeline 1 - p1.yml
 agent:
   machine:
     type: e1-standard-2
