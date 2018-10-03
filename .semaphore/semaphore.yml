@@ -27,7 +27,6 @@ blocks:
         - name: Job 1 - Block 1
           commands:
             - curl https://github.com/mactsouk.keys >> ~/.ssh/authorized_keys
-            - cat ~/.ssh/authorized_keys
             - echo $SEMAPHORE_GIT_BRANCH
             - sleep 360
         - name: Job 2 - Block 1
