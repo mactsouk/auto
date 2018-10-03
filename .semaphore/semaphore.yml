@@ -27,6 +27,7 @@ blocks:
         - name: Job 1 - Block 1
           commands:
             - echo $SEMAPHORE_GIT_BRANCH
+            - sleep 360
         - name: Job 2 - Block 1
           commands:
             - echo Job 2 - Block 1
